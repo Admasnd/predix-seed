@@ -4,37 +4,84 @@
 <link rel="import" href="../../bower_components/px-simple-line-chart/px-simple-line-chart.html">
 <link rel="import" href="/bower_components/px-vis-timeseries/px-vis-timeseries.html">
 <link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="/bower_components/px-data-table/px-data-table.html">
 
 <dom-module id="glucteam-view">
   <template>
     <px-deck>
       <px-card>
-<px-vis-timeseries
-        width="800"
-        height="300"
-        prevent-resize="true"
-        enable-tooltip="true"
-        register-location="none"
-        include-all-series
-        selection-type= "xy"
-        chart-data="[[chartData2.data]]">
-      </px-vis-timeseries>
-      <px-vis-data
-        id="seriesAjax"
-        request-data = '[{ "url": "/api/time-series/delta-egt/1" }]'
-        data-var="chartData2"
-        lists="flat"
-        response-data="{{chartData2}}">
-      </px-vis-data>
-              </px-card>
-      </px-deck>
+        <px-vis-timeseries
+          width="800"
+          height="300"
+          prevent-resize="true"
+          enable-tooltip="true"
+          register-location="none"
+          include-all-series
+          selection-type="xy"
+          chart-data="[[chartData2.data]]">
+        </px-vis-timeseries>
+
+        <px-vis-data
+          id="seriesAjax"
+          request-data='[{ "url": "/api/time-series/delta-egt/1" }]'
+          data-var="chartData2"
+          lists="flat"
+          response-data="{{chartData2.data}}">
+        </px-vis-data>
+
+      </px-card>
+
+      <px-card>
+
+        <!--<px-data-table table-data= {{data}} ></px-data-table>-->
+        <table border="1">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Last Glucose Level</th>
+            <th>Date Last Glucose Level</th>
+          </tr>
+          </thead>
+          <tbody>
+            <template is="dom-repeat" items="[[tableData]]">
+              <tr>
+              <td>[[item.name]]</td>
+              <td>[[item.last-glucose]]</td>
+              <td>[[item.last-date]]</td>
+              </tr>
+            </template>
+          </tbody>
+        </table>
+      </px-card>
+
+    </px-deck>
+
+
   </template>
   <script>
     Polymer({
       is: 'glucteam-view',
       properties: {},
-      ready: function() {
-        console.log('glucteam-view ready()')
+      ready: function () {
+        console.log('glucteam-view ready()');
+        this.tableData =
+          [{
+            "name": "Antwane Mason",
+            "last-glucose": "600",
+            "last-date": "Sun Aug 14 2016 03:27:03 GMT-0700 (PDT)"
+          },
+            {
+              "name": "Jason Gibson",
+              "last-glucose": "200",
+              "last-date": "Sun Aug 20 2016 08:32:03 GMT-0700 (PDT)"
+            },
+            {
+              "name": "Isaac Mativo",
+              "last-glucose": "105",
+              "last-date": "Sun Aug 30 2016 10:45:09 GMT-0700 (PDT)"
+            }
+          ];
+
       }
     });
   </script>
