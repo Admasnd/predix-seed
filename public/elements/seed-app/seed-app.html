@@ -80,6 +80,16 @@
             element-href="/elements/views/blankpage-view.html">
           </px-view>
 
+          <!-- /blankpage route and view -->
+          <app-route
+            route="[[_route]]"
+            pattern="/glucteam"
+            active="{{_glucteamActive}}">
+          </app-route>
+          <px-view
+            active="[[_glucteamActive]]"
+            element-href="/elements/views/glucteam-view.html">
+          </px-view>
         </main>
 
       </div>
@@ -122,6 +132,10 @@
             }, {
               "label": "Blank Page",
               "path": "blankpage",
+              "icon": "fa-file-o"
+            }, {
+              "label": "Glucose",
+              "path": "glucteam",
               "icon": "fa-file-o"
             }]
           }
